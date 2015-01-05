@@ -1,0 +1,41 @@
+<form action="/user/payrun/" method="post">
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<li>
+				<label class="title-text">金额</label>
+				<input class="text-input medium-input" type="text" id="pay_amount" name="amount" avalue="{{if $profile.type==1}}{{$amount_info.amount}}{{else}}{{$amount_info.group_amount}}{{/if}}" value="{{if $profile.type==1}}{{$amount_info.amount}}{{else}}{{$amount_info.group_amount}}{{/if}}" disabled />
+			</li>
+			
+			{{if $type	==	'0'}}
+			<li>
+				<label class="title-text">年限</label><!--会员费-->
+				<input class="text-input medium-input" type="text" id="small-input" name="year" value="{{if $pay_info}}{{$pay_info.year}}{{/if}}" disabled />
+			</li>
+			{{/if}}
+
+			{{if $type	==	4}}
+			<li>
+				<label class="title-text">年限</label><!--挂号费-->
+				<input class="text-input medium-input" type="text" id="small-input" name="year" value="{{if $pay_info}}{{$pay_info.year}}{{/if}}" disabled />
+			</li>
+			{{/if}}
+
+			{{if $type	==	3}}
+			<li>
+				<label class="title-text">设备数量</label><!--组网费-->
+				<input class="text-input medium-input" type="text" id="userpay_form_pay_count" name="count" value="" />
+			</li>
+			{{/if}}
+			
+			<li style="width:100%;">
+				<input class="button" type="submit" value="缴纳" />
+			</li>
+			
+		</fieldset>
+	</div>
+
+	<div class="clear"></div><!-- End .clear -->
+	<input type="hidden" name="uid" value="{{$uid}}">
+	<input type="hidden" name="type" value="{{$type}}">
+	</form>

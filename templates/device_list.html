@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>{{$pro_name}}-{{$title}}</title>
+		{{include file='includes/css-js-header.html'}}
+	</head>
+  
+	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+		
+		<div id="sidebar"><div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
+			
+			{{include file='includes/menu.html'	mod='device' act='list'}}
+			
+		</div></div> <!-- End #sidebar -->
+		
+		<div id="main-content"> <!-- Main Content Section with everything -->
+			
+			<noscript> <!-- Show a notification if the user has disabled javascript -->
+				<div class="notification error png_bg">
+					<div>
+						Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+					Download From <a href="http://www.exet.tk">exet.tk</a></div>
+				</div>
+			</noscript>
+			
+			<!-- Page Head -->
+			
+			<ul class="shortcut-buttons-set">
+				
+				<li>{{if $device_pay_count>$device_count}}
+					<a class="shortcut-button"><span>还可以添加<font color="red">{{$device_pay_count-$device_count}}</font>台设备<font color="red">(该限制已无效)</font></span></a>
+					{{else}}
+					<a class="shortcut-button" href="/user/pay/{{$uid}}/"><span><font color="red">不能添加设备，如需添加请补缴组网费</font></span></a>
+					{{/if}}
+				</li>
+				
+			</ul><!-- End .shortcut-buttons-set -->
+
+			<div class="clear"></div> <!-- End .clear -->
+			
+			<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>{{$title}}</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="/user/budazhizhao/{{$uid}}/" class="button">补打执照</a></li>
+						<li><a href="#tab1" {{if !$add}}class="default-tab"{{/if}}>设备列表</a></li>
+						<!-- href must be unique and match the id of target div -->
+						{{if $uid>0}}<li><a href="#tab2" {{if $add}}class="default-tab"{{/if}}>添加设备</a></li>{{/if}}
+						<li><a href="/user/profile/{{$uid}}/">会员信息</a></li>
+						<li><a href="/user/profession/{{$uid}}/">专业信息</a></li>
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+					
+					<div class="tab-content {{if !$add}}default-tab{{/if}}" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+						<div class="notification attention png_bg">
+							<div style="float:right;width:400px;">
+								<form method="post">
+									设备类型：<select name="device_type" class="medium-input">
+										{{foreach $_global_data.device_type key=key item=value}}
+											<option value={{$key}} {{if $key==$device_type}}selected{{/if}}>{{$value}}</option>
+										{{/foreach}}
+									</select>
+									<input type="submit" value="搜索" class="button">
+								</form>
+							</div>
+							<div>
+								<form method="post" action="/user/">
+									持 有 人：<input type="text" name="search" id="search" class="text-input small-input" value="">
+									<input type="submit" value="搜索" class="button">
+								</form>
+							</div>
+						</div>						
+						<table>
+							
+							<thead>
+								<tr>
+								   <th>id</th>
+								   <th>持有人</th>
+								   <th>设备型号</th>
+								   <th>天线<br />增益</th>
+								   <th>发射<br />功率</th>
+								   <th>厂家</th>
+								   <th>出厂号</th>
+								   <th>类别</th>
+								   <th>验机</th>
+								   <th>操作</th>
+								</tr>
+								
+							</thead>
+						 
+							<tfoot>
+								<tr>
+									<td colspan="10">
+										<!--<div class="bulk-actions align-left">
+											<select name="dropdown">
+												<option value="option1">Choose an action...</option>
+												<option value="option2">Edit</option>
+												<option value="option3">Delete</option>
+											</select>
+											<a class="button" href="#">Apply to selected</a>
+										</div>-->
+										{{include file='includes/page.html'}}
+										<div class="clear"></div>
+									</td>
+								</tr>
+							</tfoot>
+						 
+							<tbody>
+								{{foreach from=$resData.list key=key item=value}}
+								<tr>
+									<td>{{$value.did}}</td>
+									{{if $value.status	==	0}}<td class="delete"><font style="color:red">{{$value.user_info.username}}</font></td>{{else}}<td><a href="{{$value.did}}" title="title">{{$value.user_info.username}}</a></td>{{/if}}
+									<td>{{$value.devxh}}</td>
+									<td>{{$value.txzy}}</td>
+									<td>{{$value.fsgl}}</td>
+									<td>{{$value.devcj}}</td>
+									<td>{{$value.devchuchanghao}}</td>
+									<td>{{$_global_data.device_type[$value.device_type]}}</td>
+									<td>{{$_global_data.yes_or_no[$value.isyj]}}</td>
+									<td>
+										<!-- Icons -->
+										 <a href="/device/detail/{{$value.did}}/" title="修改设备信息" class="button">修改<br />信息</a>
+										 {{if $value.isyj	==	0}}
+										 <a href="/device/yanji/{{$value.did}}/" title="通过验机" class="button">通过<br />验机</a>
+										 {{else}}
+										 已验机
+										 {{/if}}
+										 {{if $value.status	==	1}}
+										 <a href="javascript:void();" id="delete_dev_{{$value.did}}" did="{{$value.did}}" title="删除设备" class="button">删除<br />设备</a>
+										 {{else}}
+										 <a href="/device/recoverdev/{{$value.did}}/" title="恢复设备" class="button">恢复<br />设备</a>
+										 {{/if}}
+										 <!--<a href="#" title="Delete"><img src="/images/icons/cross.png" alt="Delete" /></a> 
+										 <a href="#" title="Edit Meta"><img src="/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>-->
+									</td>
+								</tr>
+								{{/foreach}}
+							</tbody>
+							
+						</table>
+						
+					</div> <!-- End #tab1 -->
+					
+					<div class="tab-content {{if $add}}default-tab{{/if}}" id="tab2">
+					
+						{{include file='includes/device_form.html'}}
+						
+					</div> <!-- End #tab2 -->        
+					
+				</div> <!-- End .content-box-content -->
+				
+			</div> <!-- End .content-box -->
+
+			<div class="clear"></div>
+
+			{{include file='includes/foot.html'}}
+			
+		</div> <!-- End #main-content -->
+		
+	</div></body>
+  
+
+<!-- Download From www.exet.tk-->
+</html>

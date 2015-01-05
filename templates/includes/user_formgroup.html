@@ -1,0 +1,216 @@
+<form action="/user/savegroup/" method="post" id="user_form">
+	<label class="title-text" style="margin-left:10px;">会员信息</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<li>
+				<label class="title-text">集体台名称<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="user_form_username" name="username" value="{{if $edit}}{{$profile.username}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">名称汉语拼音<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="user_form_userpinyin" name="userpinyin" value="{{if $edit}}{{$profile.userpinyin}}{{/if}}" />
+			</li>
+
+			<li>
+				<label class="title-text">营业执照编号<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" name="yyzz" value="{{if $edit}}{{$profile.yyzz}}{{/if}}" />
+			</li>
+
+			<li>
+				<label class="title-text">组织机构代码<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" name="zzjg" value="{{if $edit}}{{$profile.zzjg}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">负责人身份证号</label>
+				<input class="text-input medium-input" type="text" value="{{$manager_profile.userIDcard}}" disabled />
+			</li>
+
+			<li>
+				<label class="title-text">负责人姓名</label>
+				<input class="text-input medium-input" type="text" value="{{$manager_profile.username}}" disabled />
+				<input type="hidden" name="manager_uid" value="{{$manager_profile.uid}}" />
+			</li>			
+
+			
+			
+			<li>
+				<label class="title-text">所属批次</label>
+				<select class="text-input small-input" name="pci">
+					{{foreach from=$pici_list key=key item=value}}
+					<option value='{{$value.pcname}}' {{if $edit && $profile.pci==$value.pcname}}selected{{/if}}>{{$value.pcname}}</option>
+					{{/foreach}}
+				</select>
+			</li>
+
+
+			<li>
+				<label class="title-text">会员卡</label>
+				<input  class="text-input small-input" type="text" id="span_cardno" value="{{if $edit}}{{$profile.cardno}}{{/if}}" disabled>　<input id="input_cardno" type="hidden" name="cardno" value="{{if $edit}}{{$profile.cardno}}{{/if}}"><a href="/user/cardno/" target="_blank" class="button">点击录入会员卡</a>
+			</li>
+
+			<li style="width:100%;">
+				<input class="button" type="submit" value="全部保存" />
+			</li>
+			
+		</fieldset>
+	</div>
+
+	<label class="title-text" style="margin-left:10px;">负责人通信信息</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<li>
+				<label class="title-text">负责人工作电话</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.workTel}}" disabled />
+				<input type="hidden" name="workTel" value="{{$manager_profile.workTel}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">负责人住宅电话</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.homeTel}}" disabled />
+				<input type="hidden" name="homeTel" value="{{$manager_profile.homeTel}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">负责人移动电话</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.mobTel}}" disabled />
+				<input type="hidden" name="mobTel" value="{{$manager_profile.mobTel}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">负责人电子邮件</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.mail}}" disabled />
+				<input type="hidden" name="mail" value="{{$manager_profile.mail}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">负责人通讯地址</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.txAd}}" disabled />
+				<input type="hidden" name="txAd" value="{{$manager_profile.txAd}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">邮政编码</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.txpost}}" disabled />
+				<input type="hidden" name="txpost" value="{{$manager_profile.txpost}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">负责人户籍地址</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.xzAd}}" disabled />
+				<input type="hidden" name="xzAd" value="{{$manager_profile.xzAd}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">邮政编码</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.xzpost}}" disabled />
+				<input type="hidden" name="xzpost" value="{{$manager_profile.xzpost}}" />
+			</li>
+
+			<li>
+				<label class="title-text">负责人设台地址</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.stAd}}" disabled />
+				<input type="hidden" name="stAd" value="{{$manager_profile.stAd}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">邮政编码<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.stpost}}" disabled />
+				<input type="hidden" name="stpost" value="{{$manager_profile.stpost}}" />
+			</li>
+
+			<li>
+				<label class="title-text">负责人工作单位名称</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.company}}" disabled />
+				<input type="hidden" name="company" value="{{$manager_profile.company}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">负责人职务</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.zhiwu}}" disabled />
+				<input type="hidden" name="zhiwu" value="{{$manager_profile.zhiwu}}" />
+			</li>
+
+			<li>
+				<label class="title-text">负责人工作单位地址</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.workAd}}" disabled />
+				<input type="hidden" name="workAd" value="{{$manager_profile.workAd}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">邮政编码</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="" value="{{$manager_profile.workAdPost}}" disabled />
+				<input type="hidden" name="workAdPost" value="{{$manager_profile.workAdPost}}" />
+			</li>
+			
+			<li>
+				<input class="button" type="submit" value="全部保存" />
+			</li>			
+		</fieldset>
+	</div>
+
+	<label class="title-text" style="margin-left:10px;">设台信息</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+		
+			<li>
+				<label class="title-text">操作等级</label>
+				<select class="text-input medium-input" name="Oplev" disabled>
+					{{foreach from=$level_list key=key item=value}}
+					<option value='{{$value.levelname}}' {{if $edit && $profile.Oplev==$value.levelname}}selected{{/if}}>{{$value.levelname}}</option>
+					{{/foreach}}
+				</select>
+			</li>
+
+			<li>
+				<label class="title-text">注册日期</label>
+				<input class="text-input small-input inputDate" type="text" id="inputDate_zhuce" name="zhucetime" value="{{if $edit}}{{$profile.zhucetime}}{{else}}{{$cTime|date_format:"%Y-%m-%d"}}{{/if}}" disabled />
+			</li>
+			{{if $edit}}
+			<li>
+				<label class="title-text">会员证号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="membernum" value="{{if $edit}}{{$profile.membernum}}{{/if}}" disabled />
+			</li>
+			
+			<li>
+				<label class="title-text">操作证书编号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="OpzhengBH" value="{{if $edit}}{{$profile.OpzhengBH}}{{/if}}" disabled />
+			</li>
+			{{/if}}
+			<li>
+				<label class="title-text">操作证区号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="opquhao" value="{{if $edit}}{{$profile.opquhao}}{{else}}11{{/if}}" />
+			</li>
+
+			<li>
+				<label class="title-text">注册地点</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="zhuceAd" value="{{if $edit}}{{$profile.zhuceAd}}{{else}}北京{{/if}}" />
+			</li>
+			{{if $edit}}
+			<li>
+				<label class="title-text">CRAC会员证号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="crac_id" value="{{if $edit}}{{$profile.crac_id}}{{/if}}" disabled />
+			</li>
+
+			<li>
+				<label class="title-text">PA码</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="pa" value="{{if $edit}}{{$profile.pa}}{{/if}}" disabled />
+			</li>
+			
+			<li>
+				<label class="title-text">呼号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="huhao" value="{{if $edit}}{{$profile.huhao}}{{/if}}" disabled />
+			</li>
+			{{/if}}
+			<li style="width:100%;">
+				<input class="button" type="submit" value="全部保存" />
+			</li>			
+		</fieldset>
+	</div>
+	<div class="clear"></div><!-- End .clear -->
+	<input type="hidden" name="uid" value="{{if $edit}}{{$profile.uid}}{{/if}}">
+	<input type="hidden" name="type" value="2">
+	</form>

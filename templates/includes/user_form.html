@@ -1,0 +1,270 @@
+<form action="/user/save/" method="post" id="user_form">
+	<label class="title-text" style="margin-left:10px;">会员信息 <input class="button" type="button" id="idcard_reader" value="从身份证读卡器读取信息" />{{if $edit && $remark_list}}<font style="color:red"><b>该会员有未处理信息，请注意</b></font>{{/if}}</label>
+	<div class="content-box column-vs">
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<li>
+				<label class="title-text">姓名<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="user_form_username" name="username" value="{{if $edit}}{{$profile.username}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">姓名汉语拼音<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="user_form_userpinyin" name="userpinyin" value="{{if $edit}}{{$profile.userpinyin}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">性别<font style="color:red;">★</font></label>
+				<select class="text-input medium-input" name="usersex" id="user_form_usersex">
+					{{foreach from=$_global_data.gender key=key item=value}}
+					<option value="{{$key}}" {{if $edit && $profile.usersex==$key}}selected{{/if}}>{{$value}}</option>
+					{{/foreach}}
+				</select>
+				<!--<input class="text-input medium-input" type="text" id="small-input" name="usersex" value="{{if $edit}}{{$profile.usersex}}{{/if}}" />-->
+			</li>
+			
+			<li>
+				<label class="title-text">身份证号<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="user_form_userIDcard" name="userIDcard" value="{{if $edit}}{{$profile.userIDcard}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">出生年月<font style="color:red;">★</font></label>
+				<input class="text-input small-input inputDate" type="text" id="inputDate_birth" name="userbirthday" value="{{if $edit}}{{$profile.userbirthday}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">民族<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="user_form_nation" name="userminzu" value="{{if $edit}}{{$profile.userminzu}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">所属批次</label>
+				<select class="text-input small-input" name="pci">
+					{{foreach from=$pici_list key=key item=value}}
+					<option value='{{$value.pcname}}' {{if $edit && $profile.pci==$value.pcname}}selected{{/if}}>{{$value.pcname}}</option>
+					{{/foreach}}
+				</select>
+			</li>
+
+			<li>
+				<label class="title-text">文化程度</label>
+				<select class="text-input small-input" name="userwenhua">
+					{{foreach from=$_global_data.degree key=key item=value}}
+					<option value='{{$value}}' {{if $edit && $profile.userwenhua==$value}}selected{{/if}}>{{$value}}</option>
+					{{/foreach}}
+				</select>
+			</li>
+
+			<li>
+				<label class="title-text">会员卡</label>
+				<input  class="text-input small-input" type="text" id="span_cardno" value="{{if $edit}}{{$profile.cardno}}{{/if}}" disabled>　<input id="input_cardno" type="hidden" name="cardno" value="{{if $edit}}{{$profile.cardno}}{{/if}}"><a href="/user/cardno/" target="_blank" class="button">点击录入会员卡</a>
+			</li>
+
+			<li style="width:100%;">
+				<input class="button" type="submit" value="全部保存" />
+			</li>
+			
+		</fieldset>
+	</div>
+
+	<label class="title-text" style="margin-left:10px;">通信信息</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<li>
+				<label class="title-text">工作电话</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="workTel" value="{{if $edit}}{{$profile.workTel}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">住宅电话</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="homeTel" value="{{if $edit}}{{$profile.homeTel}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">移动电话<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="small-input" name="mobTel" value="{{if $edit}}{{$profile.mobTel}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">电子邮件</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="mail" value="{{if $edit}}{{$profile.mail}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">通讯地址<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="small-input" name="txAd" value="{{if $edit}}{{$profile.txAd}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">邮政编码<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="small-input" name="txpost" value="{{if $edit}}{{$profile.txpost}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">户籍地址<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="user_form_idcardaddr" name="xzAd" value="{{if $edit}}{{$profile.xzAd}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">邮政编码<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="small-input" name="xzpost" value="{{if $edit}}{{$profile.xzpost}}{{/if}}" />
+			</li>
+
+			<li>
+				<label class="title-text">设台地址<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="small-input" name="stAd" value="{{if $edit}}{{$profile.stAd}}{{else}}北京市{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">邮政编码<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="small-input" name="stpost" value="{{if $edit}}{{$profile.stpost}}{{/if}}" />
+			</li>
+
+			<li>
+				<label class="title-text">工作单位名称</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="company" value="{{if $edit}}{{$profile.company}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">职务</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="zhiwu" value="{{if $edit}}{{$profile.zhiwu}}{{/if}}" />
+			</li>
+
+			<li>
+				<label class="title-text">工作单位地址</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="workAd" value="{{if $edit}}{{$profile.workAd}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">邮政编码</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="workAdPost" value="{{if $edit}}{{$profile.workAdPost}}{{/if}}" />
+			</li>
+			
+			<li>
+				<input class="button" type="submit" value="全部保存" />
+			</li>			
+		</fieldset>
+	</div>
+
+	<label class="title-text" style="margin-left:10px;">设台信息</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<!--<li>
+				<label class="title-text">参加俱乐部或社团名称</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="clubname" value="{{if $edit}}{{$profile.clubname}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">主管单位</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="zhuguanname" value="{{if $edit}}{{$profile.zhuguanname}}{{/if}}" />
+			</li>-->
+			
+			<li>
+				<label class="title-text">操作等级</label>
+				<select class="text-input medium-input" name="Oplev" disabled>
+					{{foreach from=$level_list key=key item=value}}
+					<option value='{{$value.levelname}}' {{if $edit && $profile.Oplev==$value.levelname}}selected{{/if}}>{{$value.levelname}}</option>
+					{{/foreach}}
+				</select>
+			</li>
+
+			<li>
+				<label class="title-text">注册日期</label>
+				<input class="text-input small-input inputDate" type="text" id="inputDate_zhuce" name="zhucetime" value="{{if $edit}}{{$profile.zhucetime}}{{else}}{{$cTime|date_format:"%Y-%m-%d"}}{{/if}}" />
+			</li>
+			{{if $edit}}
+			<li>
+				<label class="title-text">会员证号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="membernum" value="{{if $edit}}{{$profile.membernum}}{{/if}}" disabled />
+			</li>
+			
+			<li>
+				<label class="title-text">操作证书编号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="OpzhengBH" value="{{if $edit}}{{$profile.OpzhengBH}}{{/if}}" disabled />
+			</li>
+			{{/if}}
+
+
+			<li>
+				<label class="title-text">地市县<font style="color:red;">★</font></label>
+				<select class="text-input medium-input" name="area">
+					<option value=''>请选择</option>
+					{{foreach from=$_area[11] key=key item=value}}
+					<option value='{{$value}}' {{if $edit && $profile.area==$value}}selected{{/if}}>{{$value}}</option>
+					{{/foreach}}
+				</select>
+			</li>
+
+			<li>
+				<label class="title-text">注册地点</label>
+				<select class="text-input medium-input" name="zhuceAd">
+					{{*<option value=''>请选择</option>*}}
+					{{foreach from=$_province key=key item=value}}
+					<option value='{{$value}}' {{if $edit && $profile.zhuceAd==$value}}selected{{/if}}>{{$value}}</option>
+					{{/foreach}}
+				</select>
+				{{*<input class="text-input medium-input" type="text" id="small-input" name="zhuceAd" value="{{if $edit}}{{$profile.zhuceAd}}{{else}}北京{{/if}}" />*}}
+			</li>
+
+
+			<li>
+				<label class="title-text">操作证区号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="opquhao" value="{{if $edit}}{{$profile.opquhao}}{{else}}11{{/if}}" />
+			</li>
+
+			{{if $edit}}
+			<li>
+				<label class="title-text">CRAC会员证号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="crac_id" value="{{if $edit}}{{$profile.crac_id}}{{/if}}" disabled />
+			</li>
+
+			<li>
+				<label class="title-text">PA码</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="pa" value="{{if $edit}}{{$profile.pa}}{{/if}}" disabled />
+			</li>
+			
+			<li>
+				<label class="title-text">呼号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="huhao" value="{{if $edit}}{{$profile.huhao}}{{/if}}" disabled />
+			</li>
+			{{/if}}
+			<li style="width:100%;">
+				<input class="button" type="submit" value="全部保存" />
+			</li>			
+		</fieldset>
+	</div>
+
+	{{*if $edit}}
+	<label class="title-text" style="margin-left:10px;">取得操作等级时间</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<li>
+				<label class="title-text">四级</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="levFourTime" value="{{if $edit}}{{$profile.levFourTime}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">三级</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="levThreeTime" value="{{if $edit}}{{$profile.levThreeTime}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">二级</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="levTwoTime" value="{{if $edit}}{{$profile.levTwoTime}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">一级</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="levOneTime" value="{{if $edit}}{{$profile.levOneTime}}{{/if}}" />
+			</li>
+		
+		</fieldset>
+	</div>
+	{{/if*}}
+	<div class="clear"></div><!-- End .clear -->
+	<input type="hidden" name="uid" value="{{if $edit}}{{$profile.uid}}{{/if}}">
+	</form>

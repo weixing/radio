@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>读卡器</title>
+<script type="text/javascript">
+function mysub()
+{
+	var cardno=document.getElementById('cardno').value;
+	opener.document.getElementById('span_cardno').value	=	cardno;
+	opener.document.getElementById('input_cardno').value	=	cardno;
+	window.close();
+}
+
+function myfocus()
+{
+	document.getElementById('cardno').focus();
+}
+</script>
+</head>
+  
+<body onload="myfocus();">
+<form onsubmit="mysub();return false;">
+<input type="text" id="cardno">
+<input type=submit value="提交">
+</form>
+</body>
+</html>

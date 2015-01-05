@@ -1,0 +1,137 @@
+<form action="/device/save/" method="post">
+	<label class="title-text" style="margin-left:10px;">设备数据</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<li>
+				<label class="title-text">设备型号<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="small-input" name="devxh" value="{{if $edit}}{{$detail.devxh}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">型号核准代码</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="txzy" value="{{if $edit}}{{$detail.txzy}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">天线增益</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="txzy" value="{{if $edit}}{{$detail.txzy}}{{/if}}" />
+			</li>
+			{{if $edit}}
+			<li>
+				<label class="title-text">发射功率</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="fsgl" value="{{if $edit}}{{$detail.fsgl}}{{else}}{{$_global_data.power[$profile.Oplev]}}{{/if}}" disabled />
+			</li>
+			{{/if}}
+			<li>
+				<label class="title-text">设备生产厂家<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="small-input" name="devcj" value="{{if $edit}}{{$detail.devcj}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">设备出厂号<font style="color:red;">★</font></label>
+				<input class="text-input medium-input" type="text" id="small-input" name="devchuchanghao" value="{{if $edit}}{{$detail.devchuchanghao}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">呼号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="huhao" value="{{$profile.huhao}}" disabled />
+			</li>
+			
+			<li>
+				<label class="title-text">设备类型</label>
+				<select name="device_type" class="medium-input">
+					{{foreach $_global_data.device_type key=key item=value}}
+						<option value={{$key}} {{if $edit}}{{if $key==$detail.device_type}}selected{{/if}}{{/if}}>{{$value}}</option>
+					{{/foreach}}
+				</select>
+			</li>
+
+			<li>
+				<input class="button" type="submit" value="全部保存" />
+			</li>			
+		</fieldset>
+	</div>
+
+	<label class="title-text" style="margin-left:10px;">台(站)数据</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<li>
+				<label class="title-text">申请编号</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="sqbbh" value="{{$profile.pa}}" disabled />
+			</li>
+			
+			<li>
+				<label class="title-text">台站类别</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="taizhantype" value="{{if $edit}}{{$detail.taizhantype}}{{else}}业余电台{{/if}}" />
+			</li>
+			{{*
+			<li>
+				<label class="title-text">工作方式</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="worktype" value="{{if $edit}}{{$detail.worktype}}{{/if}}" />
+			</li>
+
+			<li>
+				<label class="title-text">是否机车制式电台</label>
+				<select class="text-input medium-input" name="isjizhi">
+					{{foreach from=$_global_data.yes_or_no key=key item=value}}
+					<option value='{{$value}}' {{if $edit && $detail.isjizhi==$value}}selected{{/if}}>{{$value}}</option>
+					{{/foreach}}
+				</select>
+			</li>
+			*}}
+
+			<li>
+				<label class="title-text">启用日期</label>
+				<input class="text-input small-input inputDate" type="text" id="inputDate_start" name="qiytime" value="{{if $edit}}{{$detail.qiytime}}{{else}}{{$cTime|date_format:"%Y-%m-%d"}}{{/if}}" />
+			</li>
+			
+			
+			{{*<li>
+				<label class="title-text">使用区域</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="shiyquyu" value="{{if $edit}}{{$detail.shiyquyu}}{{else}}{{$profile.zhuceAd}}{{/if}}" />
+			</li>*}}
+			
+			<li>
+				<label class="title-text">站台名称</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="taizhanname" value="{{if $edit}}{{$detail.taizhanname}}{{else}}{{$profile.username}}{{/if}}" disabled />
+			</li>
+
+			<li>
+				<label class="title-text">站台地址</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="taiad" value="{{if $edit}}{{$detail.taiad}}{{else}}{{$profile.stAd}}{{/if}}" />
+			</li>
+
+			<li style="width:100%;">
+				<input class="button" type="submit" value="全部保存" />
+			</li>
+			
+		</fieldset>
+	</div>
+	{{*
+	<label class="title-text" style="margin-left:10px;">频率数据</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<li>
+				<label class="title-text">必要带宽</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="daikuan" value="{{if $edit}}{{$detail.daikuan}}{{/if}}" />
+			</li>
+			
+			<li>
+				<label class="title-text">调制方式</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="tztype" value="{{if $edit}}{{$detail.tztype}}{{/if}}" />
+			</li>
+			
+			
+			<li>
+				<input class="button" type="submit" value="全部保存" />
+			</li>			
+		</fieldset>
+	</div>*}}
+
+	<div class="clear"></div><!-- End .clear -->
+	<input type="hidden" name="did" value="{{if $edit}}{{$detail.did}}{{/if}}">
+	<input type="hidden" name="uid" value="{{$uid}}">
+	</form>

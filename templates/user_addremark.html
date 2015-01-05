@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>{{$pro_name}}-{{$title}}</title>
+		{{include file='includes/css-js-header.html'}}
+	</head>
+  
+	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+		
+		<div id="sidebar"><div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
+			
+			{{include file='includes/menu.html'	mod='user' act='list'}}
+			
+		</div></div> <!-- End #sidebar -->
+		
+		<div id="main-content"> <!-- Main Content Section with everything -->
+			
+			<noscript> <!-- Show a notification if the user has disabled javascript -->
+				<div class="notification error png_bg">
+					<div>
+						Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+					Download From <a href="http://www.exet.tk">exet.tk</a></div>
+				</div>
+			</noscript>
+			
+			<!-- Page Head -->
+			
+			<div class="clear"></div> <!-- End .clear -->
+			
+			<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>{{$title}}</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="/user/profile/{{$profile.uid}}/">用户信息</a></li>
+						<li><a href="#tab1" class="default-tab">添加待处理信息</a></li>
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+					
+					<div class="tab-content default-tab" id="tab1"><!--tab1-->
+
+						<form action="/user/saveremark/" method="post" id="user_form">
+							<label class="title-text" style="margin-left:10px;">添加待处理信息</label>
+							<div class="content-box column-vs">	
+								<fieldset style="margin:10px;">
+									<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+									<li>
+										<label class="title-text">姓名</label>
+										<input class="text-input medium-input" type="text" value="{{$profile.username}}" disabled/>
+									</li>
+									
+									<li>
+										<label class="title-text">crac会员证号</label>
+										<input class="text-input medium-input" type="text" value="{{$profile.crac_id}}" disabled/>
+									</li>
+
+									<li>
+										<label class="title-text">会员证号</label>
+										<input class="text-input medium-input" type="text" value="{{$profile.membernum}}" disabled/>
+									</li>
+
+									<li>
+										<label class="title-text">呼号</label>
+										<input class="text-input medium-input" type="text" value="{{$profile.huhao}}" disabled/>
+									</li>
+
+									<li style="width:100%">
+										<label class="title-text">备注信息</label>
+										<textarea name="remark_text"></textarea>
+									</li>
+
+									<li>
+										<input class="button" type="submit" value="全部保存" />
+									</li>			
+								</fieldset>
+							</div>
+
+							<div class="clear"></div><!-- End .clear -->
+							<input type="hidden" name="uid" value="{{$profile.uid}}">
+						</form>
+
+						<form>
+						<label class="title-text" style="margin-left:10px;">历史待处理信息</label>
+						<div class="content-box column-vs">	
+							<fieldset style="margin:10px;">
+								<table>
+									
+									<thead>
+										<tr>
+										   <th>备注信息</th>
+										   <th>处理备注</th>
+										   <th>状态</th>
+										</tr>
+									</thead>
+								 					 
+									<tbody>
+										{{foreach from=$remark_list key=key item=value}}
+										<tr>
+											<td>{{$value.remark_text}}</td>
+											<td>{{$value.operate_text}}</td>
+											<td>{{if $value.status==1}}<font style="color:red">已处理</a>{{else}}未处理{{/if}}</td>
+										</tr>
+										{{/foreach}}
+									</tbody>
+									
+								</table>
+							</fieldset>
+						</div>
+						</form>
+						
+					</div>
+					
+				</div> <!-- End .content-box-content -->
+				
+			</div> <!-- End .content-box -->
+
+			<div class="clear"></div>
+
+			{{include file='includes/foot.html'}}
+			
+		</div> <!-- End #main-content -->
+		
+	</div></body>
+  
+
+<!-- Download From www.exet.tk-->
+</html>

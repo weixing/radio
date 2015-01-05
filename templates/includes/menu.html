@@ -1,0 +1,55 @@
+			
+			<!--<h1 id="sidebar-title"><a href="#">Simpla Admin</a></h1>-->
+		  
+			<!-- Logo (221px wide) -->
+			<img id="logo" src="/images/logo.jpg" alt="Simpla Admin logo" />
+			<br />
+			<!-- Sidebar Profile links -->
+			<div id="profile-links">
+				当前用户：<a href="#" title="Edit your profile">{{$session.username}}</a>
+				<br />
+				<a href="/login/logout/" title="Sign Out">退出登录</a>
+			</div>
+
+			<ul id="main-nav">  <!-- Accordion Menu -->
+				
+				<li> 
+					<a href="#" class="nav-top-item {{if $mod=='user' || $mod=='index'}}current{{/if}}">功能列表</a>
+					<!-- Add the class "current" to current menu item -->
+					<ul>
+						<li><a {{if $mod=='index' && $act=='index'}}class="current"{{/if}} href="/index/">系统首页</a></li>
+						{{if $session.permission[0]	==	1}}<li><a {{if $mod=='user' && $act=='list'}}class="current"{{/if}} href="/user/">会员列表</a></li>{{/if}}
+						<!-- Add class "current" to sub menu items also -->
+						{{if $session.permission[2]	==	1}}<li><a {{if $mod=='user' && $act=='add'}}class="current"{{/if}} href="/user/add/">添加会员</a></li>{{/if}}
+						{{*if $session.permission[2]	==	1}}<li><a {{if $mod=='user' && $act=='add'}}class="current"{{/if}} href="/user/add/">添加集体会员</a></li>{{/if*}}
+						{{if $session.permission[19]	==	1}}<li><a {{if $mod=='user' && $act=='huhao'}}class="current"{{/if}} href="/user/huhao/">生成呼号</a></li>{{/if}}
+						{{if $session.permission[36]	==	1}}<li><a {{if $mod=='user' && $act=='paydata'}}class="current"{{/if}} href="/user/paydata/">导出付费详情</a></li>{{/if}}
+						{{if $session.permission[13]	==	1}}<li><a {{if $mod=='user' && $act=='export'}}class="current"{{/if}} href="/user/export/">导出会员信息</a></li>{{/if}}
+						{{if $session.permission[13]	==	1}}<li><a {{if $mod=='user' && $act=='import'}}class="current"{{/if}} href="/user/import/">无管局数据导入</a></li>{{/if}}
+						{{if $session.permission[18]	==	1}}<li><a {{if $mod=='user' && $act=='zhizhao'}}class="current"{{/if}} href="/user/zhizhao/">打印执照</a></li>{{/if}}
+						{{if $session.permission[33]	==	1}}<li><a {{if $mod=='user' && $act=='remarklist'}}class="current"{{/if}} href="/user/remarklist/">待处理问题</a></li>{{/if}}
+					</ul>
+				</li>
+				
+				<!--<li>
+					<a href="#" class="nav-top-item {{if $mod=='device'}}current{{/if}}">设备管理</a>
+					<ul>
+						<li><a {{if $mod=='device' && $act=='list'}}class="current"{{/if}} href="/device/">设备列表</a></li>
+					</ul>
+				</li>-->
+				
+				<li>
+					<a href="#" class="nav-top-item {{if $mod=='set'}}current{{/if}}">系统设定</a>
+					<ul>
+						{{if $session.permission[11]	==	1}}<li><a {{if $mod=='set' && $act=='pwd'}}class="current"{{/if}} href="/set/pwd/">修改密码</a></li>{{/if}}
+						{{if $session.permission[22]	==	1}}<li><a {{if $mod=='set' && $act=='adminlist'}}class="current"{{/if}} href="/set/adminlist/">账号管理</a></li>{{/if}}
+						{{if $session.permission[6]	==	1}}<li><a {{if $mod=='set' && $act=='pay'}}class="current"{{/if}} href="/set/pay/">费用设置</a></li>{{/if}}
+						{{if $session.permission[9]	==	1}}<li><a {{if $mod=='set' && $act=='pici'}}class="current"{{/if}} href="/set/pici/">注册批次管理</a></li>{{/if}}
+						{{if $session.permission[21]	==	1}}<li><a {{if $mod=='set' && $act=='yanjipici'}}class="current"{{/if}} href="/set/yanjipici/">验机批次管理</a></li>{{/if}}
+						{{if $session.permission[10]	==	1}}<li><a {{if $mod=='set' && $act=='level'}}class="current"{{/if}} href="/set/level/">级别设置</a></li>{{/if}}
+						{{if $session.permission[35]	==	1}}<li><a {{if $mod=='set' && $act=='payyear'}}class="current"{{/if}} href="/set/payyear/">会费年限设置</a></li>{{/if}}
+						{{if $session.permission[27]	==	1}}<li><a {{if $mod=='set' && $act=='log'}}class="current"{{/if}} href="/set/log/">操作日志</a></li>{{/if}}
+					</ul>
+				</li>   
+				
+			</ul> <!-- End #main-nav -->

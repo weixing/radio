@@ -1,0 +1,40 @@
+<label class="title-text" style="margin-left:10px;"><b>{{$profile.username}}</b></label>
+<table>				
+
+	<tbody>
+		{{foreach from=$_global_data.profession_edit key=key item=value}}
+		<tr><td>
+			<form action="/user/profession_run/" method="post">
+			<p>
+				<label class="title-text">{{$value[0]}}</label>
+				{{if $key	==	4}}
+				<select class="text-input small-input" name="Oplev">
+					{{foreach from=$level_list key=key1 item=value1}}
+					<option value='{{$value1.levelname}}' {{if $profile[$value[1]]==$value1.levelname}}selected{{/if}}>{{$value1.levelname}}</option>
+					{{/foreach}}
+				</select>
+				{{else if $key	==	5}}
+				<select class="text-input small-input" name="test_pass">
+					{{foreach from=$_global_data.yes_or_no key=key1 item=value1}}
+					<option value='{{$key1}}' {{if $profile[$value[1]]==$key1}}selected{{/if}}>{{$value1}}</option>
+					{{/foreach}}
+				</select>
+				{{else if $key	==	6}}
+				<select class="text-input small-input" name="yanjipici">
+					{{foreach from=$yanjipici key=key1 item=value1}}
+					<option value='{{$value1.pid}}'>{{$value1.pcname}}</option>
+					{{/foreach}}
+				</select>
+				{{else}}
+				<input class="text-input small-input" type="text" id="user_form_username" name="{{$value[1]}}" value="{{$profile[$value[1]]}}" />
+				{{/if}}
+				<input class="button" type="submit" value="保存" />
+			</p>
+			<input type=hidden name="uid" value="{{$profile.uid}}">
+			<input type=hidden name="profession_type" value="{{$key}}">
+			</form>
+		</td></tr>
+		{{/foreach}}
+	</tbody>
+</table>
+<div class="clear"></div><!-- End .clear -->

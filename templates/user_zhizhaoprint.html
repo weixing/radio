@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+<script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- 
+$(function(){
+	var navigatorName = "Microsoft Internet Explorer";  
+	if(navigator.appName	!=	navigatorName)
+	{
+		alert('请使用ie浏览器进行打印')
+	}
+	else
+	{
+		//window.print();
+	}
+});
+-->
+</script>
+<style>
+body{
+	margin:0px;
+}
+
+.left{
+	float:left;
+	width:280px;
+	height:339px;
+}
+
+.mid{
+	float:left;
+	width:289px;
+	height:339px;
+	padding: 8px;
+}
+
+.right{
+	float:right;
+	width:190px;
+	height:339px;
+	padding: 8px;
+}
+
+.topspace{
+	width:100%;
+	height:19px;
+}
+
+.bottomspace{
+	width:100%;
+	height:37px;
+}
+
+.borderdiv{
+	width:761px;
+}
+
+div li {
+	font-size:12px;
+    list-style-type:none;
+    float:left;
+    text-align:left;
+    overflow:hidden;
+    margin:0 0 0 0px;
+    height:22px;
+    padding:5 0 0 5px;
+    border: #000 1px solid;
+}
+</style>
+
+<!--        #border: #C33 1px solid;-->
+</head>
+<body>
+<center>
+{{assign var="foreach_tag" value=0}}
+{{foreach from=$exportData key=key item=value}}
+{{if $value.device_list	!= 'none'}}
+{{foreach from=$value.device_list key=key1 item=value1}}
+{{*if $foreach_tag%3!=0}}<div class="topspace"></div>{{/if*}}
+<div class="borderdiv">
+	<div class="left">
+	<font style="font-size:10px;">
+		<p style="padding-left:30px;padding-top:90px;">执照编号：　{{$value.pa}}</p>
+
+	</font>
+	</div>
+	<div class="mid">
+				<!--<p style="padding-left:30px;">有效期：　　{{$start_date}}　至<br />
+		　　　　　　{{$end_date}}</p>-->
+		{{*if $key1	>	0}}业余无线电台执照附页{{/if*}}
+		<li style="width:80px;">设台人员</li><li style="width:190px;">{{$value.username}}</li>
+		<li style="width:80px;">证件号码</li><li style="width:190px;">{{$value.userIDcard}}</li>
+		<li style="width:80px;">电台呼号</li><li style="width:190px;">{{$value.huhao}}</li>
+		<li style="width:80px;">电台类别</li><li style="width:190px;">{{$value.Oplev}}类</li>
+		<li style="width:80px;">使用区域</li><li style="width:190px;">北京</li>
+		<li style="width:80px;height:45px;">有效期</li><li style="width:190px;height:45px;">{{$start_date}}至<br/>{{$end_date}}</li>
+		<li style="width:80px;height:80px;">台站地址<br />或<br />车牌号</li><li style="width:190px;height:80px;">{{$value.stAd}}</li>
+		<li style="border: #000 0px solid;height=75px;padding:12px;">
+			核发单位：<br/><br/><br/>
+			核发日期：　　　　　{{$start_date}}
+
+		</li>
+	</div>
+	<div class="right">
+		{{if $key1	>	0}}<font style="font-size:12px;">业余无线电台执照附页</font>{{/if}}
+		<li style="width:82px;">设备型号</li><li style="width:90px;">出厂号</li>
+		{{foreach from=$value1 key=key2 item=value2}}
+		<li style="width:82px;">{{$value2.devxh}}</li><li style="width:90px;">{{$value2.devchuchanghao}}</li>
+		{{/foreach}}
+	</div>
+</div>
+{{if ($foreach_tag+1)%3!=0}}<div class="bottomspace"></div>{{/if}}
+{{assign var="foreach_tag" value=$foreach_tag+1}}
+{{/foreach}}
+{{else}}
+{{*if $foreach_tag%3!=0}}<div class="topspace"></div>{{/if*}}
+<div class="borderdiv">
+	<div class="left">
+	<font style="font-size:10px;">
+		<p style="padding-left:30px;padding-top:90px;">执照编号：　{{$value.pa}}</p>
+
+	</font>
+	</div>
+	<div class="mid">
+				<!--<p style="padding-left:30px;">有效期：　　{{$start_date}}　至<br />
+		　　　　　　{{$end_date}}</p>-->
+		{{*if $key1	>	0}}业余无线电台执照附页{{/if*}}
+		<li style="width:80px;">设台人员</li><li style="width:190px;">{{$value.username}}</li>
+		<li style="width:80px;">证件号码</li><li style="width:190px;">{{$value.userIDcard}}</li>
+		<li style="width:80px;">电台呼号</li><li style="width:190px;">{{$value.huhao}}</li>
+		<li style="width:80px;">电台类别</li><li style="width:190px;">{{$value.Oplev}}类</li>
+		<li style="width:80px;">使用区域</li><li style="width:190px;">北京</li>
+		<li style="width:80px;height:45px;">有效期</li><li style="width:190px;height:45px;">{{$start_date}}至<br/>{{$end_date}}</li>
+		<li style="width:80px;height:80px;">台站地址<br />或<br />车牌号</li><li style="width:190px;height:80px;">{{$value.stAd}}</li>
+		<li style="border: #000 0px solid;height=75px;padding:12px;">
+			核发单位：<br/><br/><br/>
+			核发日期：　　　　　{{$start_date}}
+
+		</li>
+	</div>
+	<div class="right">
+		<li style="width:82px;">设备型号</li><li style="width:90px;">出厂号</li>
+		<li style="width:82px;"></li><li style="width:90px;"></li>
+	</div>
+</div>
+{{if ($foreach_tag+1)%3!=0}}<div class="bottomspace"></div>{{/if}}
+{{assign var="foreach_tag" value=$foreach_tag+1}}
+{{/if}}
+{{*if $key+1%3!=0}}<div style="width:100%;height:50px;"></div>{{/if*}}
+{{/foreach}}
+</center>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>{{$pro_name}}-{{$title}}</title>
+		{{include file='includes/css-js-header.html'}}
+	</head>
+  
+	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+		
+		<div id="sidebar"><div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
+			
+			{{include file='includes/menu.html'	mod='user' act='list'}}
+			
+		</div></div> <!-- End #sidebar -->
+		
+		<div id="main-content"> <!-- Main Content Section with everything -->
+			
+			<noscript> <!-- Show a notification if the user has disabled javascript -->
+				<div class="notification error png_bg">
+					<div>
+						Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+					Download From <a href="http://www.exet.tk">exet.tk</a></div>
+				</div>
+			</noscript>
+			
+			<!-- Page Head -->
+			
+			<div class="clear"></div> <!-- End .clear -->
+			
+			<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>{{$title}}</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">{{$profile.username}}照片</a></li>
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+					
+					<div class="tab-content default-tab" id="tab1"><!--tab1-->
+						<form>
+						<div class="content-box column-vs">	
+							<fieldset style="margin:10px;">
+								<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+								{{foreach from=$resData key=key item=value}}
+								<li style="width:100%;">
+									<img src="{{$value.photo_filename}}">
+								</li>
+								{{/foreach}}
+							</fieldset>
+						</div>
+						</form>
+					</div>
+
+				</div> <!-- End .content-box-content -->
+				
+			</div> <!-- End .content-box -->
+
+			<div class="clear"></div>
+
+			{{include file='includes/foot.html'}}
+			
+		</div> <!-- End #main-content -->
+		
+	</div>
+
+<div id="main">
+<!--拍照部分开始-->
+<style type="text/css">
+#camera{width:598px; height:525px; position:fixed; bottom:-466px; left:50%; margin-left:-300px; border:1px solid #f0f0f0; background:url(/images/camera/cam_bg.jpg) repeat-y; -moz-border-radius:4px 4px 0 0; -webkit-border-radius:4px 4px 0 0; border-radius:4px 4px 0 0; -moz-box-shadow:0 0 4px rgba(0,0,0,0.6); -webkit-box-shadow:0 0 4px rgba(0,0,0,0.6); box-shadow:0 0 4px rgba(0,0,0,0.6);}
+#cam{width:100%; height:66px; display:block; position:absolute; top:0; left:0; background:url(/images/camera/cam.png) no-repeat center center; cursor:pointer}
+#webcam{width:520px; height:370px; margin:66px auto 22px; line-height:360px; background:#ccc; color:#666; text-align:center}
+.button_pane{text-align:center;}
+.btn_blue,.btn_green{width:99px; height:38px; line-height:32px; margin:0 4px; border:none; display:inline-block; text-align:center; font-size:14px; color:#fff !important; text-shadow:1px 1px 1px #277c9b; background:url(/images/camera/buttons.png) no-repeat}
+.btn_green{background:url(/images/camera/buttons.png) no-repeat right top;text-shadow:1px 1px 1px #498917;}
+.hidden{display:none}
+
+#photos{width:80%; margin:40px auto}
+#photos:hover a{opacity:0.5}
+#photos a:hover{opacity:1}
+</style>					
+
+<div id="photos"></div>
+
+<div id="camera">
+	<div id="cam"></div>
+	<div id="webcam"></div>
+	<div id="buttons">
+		<div class="button_pane" id="shoot"><a id="btn_shoot" href="" class="btn_blue">拍照</a></div>
+		<div class="button_pane hidden" id="upload">
+			<a id="btn_cancel" href="" class="btn_blue">取消</a> <a id="btn_upload" href="" class="btn_green">上传</a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">var curUID='{{$profile.uid}}';</script>
+<link rel="stylesheet" type="text/css" href="/js/camera/fancybox/jquery.fancybox-1.3.4.css" />
+<script type="text/javascript" src="/js/camera/jquery.easing.js"></script>
+<script type="text/javascript" src="/js/camera/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="/js/camera/webcam.js"></script>
+<script type="text/javascript">
+// JavaScript Document
+$(function(){
+	//loadpic();
+	
+	webcam.set_swf_url('/js/camera/webcam.swf');
+	webcam.set_api_url('/user/upload/{{$profile.uid}}/');	// The upload script
+	webcam.set_quality(80);				// JPEG Photo Quality
+	webcam.set_shutter_sound(true, '/js/camera/shutter.mp3');
+
+	// Generating the embed code and adding it to the page:	
+	var cam = $("#webcam");
+	cam.html(
+		webcam.get_html(cam.width(), cam.height())
+	);
+	
+	var camera = $("#camera");
+	var shown = false;
+	$('#cam').click(function(){
+		
+		if(shown){
+			camera.animate({
+				bottom:-466
+			});
+		}else {
+			camera.animate({
+				bottom:-5
+			},{easing:'easeOutExpo',duration:'slow'});
+		}
+		
+		shown = !shown;
+	});
+	
+	$("#btn_shoot").click(function(){
+		webcam.freeze();
+		$("#shoot").hide();
+		$("#upload").show();
+		return false;
+	});
+	
+	$('#btn_cancel').click(function(){
+		webcam.reset();
+		$("#shoot").show();
+		$("#upload").hide();
+		return false;
+	});
+	
+	$('#btn_upload').click(function(){
+		webcam.upload();
+		webcam.reset();
+		$("#shoot").show();
+		$("#upload").hide();
+		return false;
+	});
+	
+	
+	webcam.set_hook('onComplete', function(msg){
+		
+		msg = $.parseJSON(msg);
+		
+		if(msg.error){
+			alert(msg.message);
+		}
+		else {
+			// Adding it to the page;
+			var pic = '<a rel="group" href="uploads/'+msg.filename+'"><img src="uploads/small_'+msg.filename+'"></a>';
+			$("#photos").prepend(pic);
+			initFancyBox();
+		}
+	});
+	
+	webcam.set_hook('onError',function(e){
+		cam.html(e);
+	});
+	
+	
+	function initFancyBox(){
+		$("a[rel=group]").fancybox({
+		    'transitionIn'	: 'elastic',
+		    'transitionOut'	: 'elastic',
+		    'cyclic'        : true
+	    });
+	}
+	
+	function loadpic(){
+		$.getJSON("getpic.php",function(json){
+			if(json){
+				$.each(json,function(index,array){ 
+				   var pic = '<a rel="group" href="uploads/'+array['pic']+'"><img src="uploads/small_'+array['pic']+'"></a>';
+                   $("#photos").prepend(pic); 
+                }); 
+			}
+			initFancyBox();
+		});
+	}
+});
+</script>
+</div>
+</body>
+  
+
+<!-- Download From www.exet.tk-->
+</html>

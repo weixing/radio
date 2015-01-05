@@ -1,0 +1,22 @@
+<form action="/set/payrun/" method="post">
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<p>
+				<label class="title-text">{{$pay_type[$type][0]}}个人会员金额</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="amount" value="{{$resData.amount}}" />
+			</
+
+			<p>
+				<label class="title-text">{{$pay_type[$type][0]}}集体会员金额</label>
+				<input class="text-input medium-input" type="text" id="small-input" name="group_amount" value="{{$resData.group_amount}}" />
+			</p>			
+			<p>
+				<input class="button" type="submit" value="保存" />
+			</p>
+			
+		</fieldset>
+	</div>
+	<div class="clear"></div><!-- End .clear -->
+	<input type="hidden" name="pay_type" value="{{$type}}">
+	</form>

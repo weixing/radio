@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>{{$pro_name}}-{{$title}}</title>
+		{{include file='includes/css-js-header.html'}}
+	</head>
+  
+	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+		
+		<div id="sidebar"><div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
+			
+			{{include file='includes/menu.html'	mod='set' act='log'}}
+			
+		</div></div> <!-- End #sidebar -->
+		
+		<div id="main-content"> <!-- Main Content Section with everything -->
+			
+			<noscript> <!-- Show a notification if the user has disabled javascript -->
+				<div class="notification error png_bg">
+					<div>
+						Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+					Download From <a href="http://www.exet.tk">exet.tk</a></div>
+				</div>
+			</noscript>
+			
+			<!-- Page Head -->
+			<!--<h2>Welcome John</h2>
+			<p id="page-intro">What would you like to do?</p>
+			
+			<ul class="shortcut-buttons-set">
+				
+				<li><a class="shortcut-button" href="#"><span>
+					<img src="/images/icons/pencil_48.png" alt="icon" /><br />
+					Write an Article
+				</span></a></li>
+				
+				<li><a class="shortcut-button" href="#"><span>
+					<img src="/images/icons/paper_content_pencil_48.png" alt="icon" /><br />
+					Create a New Page
+				</span></a></li>
+				
+				<li><a class="shortcut-button" href="#"><span>
+					<img src="/images/icons/image_add_48.png" alt="icon" /><br />
+					Upload an Image
+				</span></a></li>
+				
+				<li><a class="shortcut-button" href="#"><span>
+					<img src="/images/icons/clock_48.png" alt="icon" /><br />
+					Add an Event
+				</span></a></li>
+				
+				<li><a class="shortcut-button" href="#messages" rel="modal"><span>
+					<img src="/images/icons/comment_48.png" alt="icon" /><br />
+					Open Modal
+				</span></a></li>
+				
+			</ul><!-- End .shortcut-buttons-set -->
+			
+			<div class="clear"></div> <!-- End .clear -->
+			
+			<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>{{$title}}</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">操作日志</a></li>
+						<!-- href must be unique and match the id of target div -->
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+					
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+						<div class="notification attention png_bg">
+							<div>
+								<form method="post" action="/set/log/">
+									BRSA会员号： <input type="text" name="membernum" class="text-input small-input" value="{{$membernum}}"><br />
+									设备编号：　　<input type="text" name="did" class="text-input small-input" value="{{$did}}"><br />
+									时间段：　　　<input class="text-input small-input inputDate" type="text" id="inputDate_start" name="start_date" value="{{if $start_date!='0000-00-00'}}{{$start_date}}{{/if}}" />至
+									<input class="text-input small-input inputDate" type="text" id="inputDate_end" name="end_date" value="{{if $end_date!='0000-00-00'}}{{$end_date}}{{/if}}" /><br />
+									操作类型：　　<select class="text-input small-input" name="type">
+													<option value='default'>请选择</option>
+													{{foreach from=$_global_data.log_type key=key item=value}}
+													<option value='{{$key}}' {{if $type==$key}}selected{{/if}}>{{$value}}</option>
+													{{/foreach}}
+													</select><br />
+									操作管理员： <input type="text" name="admin" class="text-input small-input" value="{{$admin}}"><br />
+									<input type="submit" value="搜索" class="button">
+								</form>
+							</div>
+						</div>						
+						<table>
+							
+							<thead>
+								<tr>
+								   <th>操作类型</th>
+								   <th>操作详情</th>
+								   <th>用户id</th>
+								   <th>设备id</th>
+								   <th>操作时间</th>
+								   <th>操作人</th>
+								</tr>
+								
+							</thead>
+						 
+							<tfoot>
+								<tr>
+									<td colspan="6">
+										{{include file='includes/page.html'}}
+										<div class="clear"></div>
+									</td>
+								</tr>
+							</tfoot>
+						 
+							<tbody>
+								{{foreach from=$resData.list key=key item=value}}
+								<tr>
+									<td>{{$_global_data.log_type[$value.class]}}</td>
+									<td>{{$value.desc}}</td>
+									<td>{{if $value.uid	>	0}}<a href="/user/profile/{{$value.uid}}/">{{$value.uid}}</a>{{else}}-{{/if}}</td>
+									<td>{{if $value.did	>	0}}<a href="/device/detail/{{$value.did}}/">{{$value.did}}</a>{{else}}-{{/if}}</td>
+									<td>{{$value.time|date_format:"%Y-%m-%d %H:%M:%S"}}</td>
+									<td>{{$value.admin_info.username}}</td>
+								</tr>
+								{{/foreach}}
+							</tbody>
+							
+						</table>
+						
+					</div> <!-- End #tab1 -->
+
+				</div> <!-- End .content-box-content -->
+				
+			</div> <!-- End .content-box -->
+
+			<div class="clear"></div>
+
+			{{include file='includes/foot.html'}}
+			
+		</div> <!-- End #main-content -->
+		
+	</div></body>
+  
+
+<!-- Download From www.exet.tk-->
+</html>

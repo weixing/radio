@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>{{$pro_name}}-{{$title}}</title>
+		{{include file='includes/css-js-header.html'}}
+	</head>
+  
+	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+		
+		<div id="sidebar"><div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
+			
+			{{include file='includes/menu.html'	mod='user' act='list'}}
+			
+		</div></div> <!-- End #sidebar -->
+		
+		<div id="main-content"> <!-- Main Content Section with everything -->
+			
+			<noscript> <!-- Show a notification if the user has disabled javascript -->
+				<div class="notification error png_bg">
+					<div>
+						Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+					Download From <a href="http://www.exet.tk">exet.tk</a></div>
+				</div>
+			</noscript>
+			
+			<!-- Page Head -->
+			<!--<h2>Welcome John</h2>
+			<p id="page-intro">What would you like to do?</p>
+			
+			<ul class="shortcut-buttons-set">
+				
+				<li><a class="shortcut-button" href="#"><span>
+					<img src="/images/icons/pencil_48.png" alt="icon" /><br />
+					Write an Article
+				</span></a></li>
+				
+				<li><a class="shortcut-button" href="#"><span>
+					<img src="/images/icons/paper_content_pencil_48.png" alt="icon" /><br />
+					Create a New Page
+				</span></a></li>
+				
+				<li><a class="shortcut-button" href="#"><span>
+					<img src="/images/icons/image_add_48.png" alt="icon" /><br />
+					Upload an Image
+				</span></a></li>
+				
+				<li><a class="shortcut-button" href="#"><span>
+					<img src="/images/icons/clock_48.png" alt="icon" /><br />
+					Add an Event
+				</span></a></li>
+				
+				<li><a class="shortcut-button" href="#messages" rel="modal"><span>
+					<img src="/images/icons/comment_48.png" alt="icon" /><br />
+					Open Modal
+				</span></a></li>
+				
+			</ul><!-- End .shortcut-buttons-set -->
+			
+			<div class="clear"></div> <!-- End .clear -->
+			
+			<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>{{$title}}</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">会员列表</a></li>
+						<!-- href must be unique and match the id of target div -->
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+					
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+						<div class="notification attention png_bg">
+							<div>
+								<form method="post">
+									<input type="text" name="search" id="search" class="text-input medium-input" value="{{$search}}">
+									<input type="submit" value="搜索" class="button">
+								</form>
+							</div>
+						</div>						
+						<table>
+							
+							<thead>
+								<tr>
+								   {{*<th style="width:92px;">会员证号</th>
+								   <th style="width:52px;">姓名</th>
+								   <th style="width:125px;">身份证号</th>
+								   <th style="width:72px;">操作证号</th>
+								   <th style="width:60px;">呼号</th>
+								   <th style="width:16px;">等级</th>
+								   <th style="width:84px;">申请编号</th>
+								   <th style="width:46px;">注册批次</th>*}}
+								   <th>会员证号</th>
+								   <th style="width:52px;">姓名</th>
+								   <th>身份证号</th>
+								   <th>操作证号</th>
+								   <th>呼号</th>
+								   <th>等级</th>
+								   <th>申请编号</th>
+								   <th style="width:46px;">注册批次</th>
+								   <th>操作</th>
+								</tr>
+								
+							</thead>
+						 
+							<tfoot>
+								<tr>
+									<td colspan="8">
+										<!--<div class="bulk-actions align-left">
+											<select name="dropdown">
+												<option value="option1">Choose an action...</option>
+												<option value="option2">Edit</option>
+												<option value="option3">Delete</option>
+											</select>
+											<a class="button" href="#">Apply to selected</a>
+										</div>-->
+										{{include file='includes/page.html'}}
+										<div class="clear"></div>
+									</td>
+								</tr>
+							</tfoot>
+						 
+							<tbody>
+								{{foreach from=$resData.list key=key item=value}}
+								<tr>
+									<td><a href="/user/profile/{{$value.uid}}/" title="修改会员信息">{{$value.membernum}}</a></td>
+									<td>{{$value.username}}</td>
+									<td>{{if $value.type==1}}{{$value.userIDcard}}{{else}}集体会员{{/if}}</td>
+									<td>{{$value.crac_id}}</td>
+									<td>{{$value.huhao}}</td>
+									<td>{{$value.Oplev}}</td>
+									<td>{{$value.pa}}</td>
+									<td>{{$value.pci}}</td>
+									<td>
+										{{if $cMethod	==	'index'	||	$custom == 101}}
+										<a href="/user/profile/{{$value.uid}}/" title="修改会员基本信息" class="button">基本<br />信息</a>
+										<a href="/user/profession/{{$value.uid}}/" title="修改会员专业信息" class="button">专业<br />信息</a>
+										<a href="/user/pay/{{$value.uid}}" title="费用缴纳" class="button">费用<br />缴纳</a>
+										{{*<a href="/user/buzhao/{{$value.uid}}" title="补照/换照" class="button">补照<br />换照</a>*}}
+										<a href="/device/add/{{$value.uid}}" title="添加设备" class="button">添加<br />设备</a>
+										<a href="/device/index/{{$value.uid}}" title="查看设备" class="button">查看<br />设备</a>
+										<a href="/user/camera/{{$value.uid}}/" title="照片" class="button">照片<br />管理</a>
+										<a href="/user/newpici/{{$value.uid}}/" title="最新批次" class="button">最新<br />批次</a>
+										{{else}}
+											{{if $custom < 100}}
+											<a href="/user/pay_type/{{$value.uid}}/{{$custom}}/" title="缴纳{{$pay_type[$custom][0]}}" class="button">缴纳{{$pay_type[$custom][0]}}</a>
+											{{else}}
+												{{if $custom	==	100}}
+												{{*剩余考试次数：<font style="color:red;">{{$test_times['A']-($value.test_times-($value.test_charge-1+1)*$test_times['A'])}}</font>次*}}
+												<a href="/user/pass/{{$value.uid}}/1/" title="通过考试" class="button">通过考试</a>
+												<a href="javascript:void();" id="testpass_{{$value.uid}}" uid="{{$value.uid}}" title="未通过考试" class="button">未通过考试</a>
+												{{/if}}
+												{{if $custom	==	104}}
+												{{*剩余考试次数：<font style="color:red;">{{$test_times['B']-($value.testb_times-($value.testb_charge-1)*$test_times['B'])}}</font>次*}}
+												<a href="/user/passb/{{$value.uid}}/1/" title="通过考试" class="button">通过考试</a>
+												<a href="javascript:void();" id="testpassb_{{$value.uid}}" uid="{{$value.uid}}" title="未通过考试" class="button">未通过考试</a>
+												{{/if}}
+												{{if $custom	==	105}}
+												{{*剩余考试次数：<font style="color:red;">{{$test_times['C']-($value.testc_times-($value.testc_charge-1)*$test_times['C'])}}</font>次*}}
+												<a href="/user/passc/{{$value.uid}}/1/" title="通过考试" class="button">通过考试</a>
+												<a href="javascript:void();" id="testpassc_{{$value.uid}}" uid="{{$value.uid}}" title="未通过考试" class="button">未通过考试</a>
+												{{/if}}
+												{{if $custom	==	102}}
+												<a href="javascript:void();" id="yanjiuserdel_{{$value.uid}}" uid="{{$value.uid}}" pid="{{$_listyanjipid}}" title="从批次中删除" class="button">从批次中删除</a>
+												{{/if}}
+												{{if $custom	==	103}}
+												<a href="/user/qiandao/{{$value.uid}}/" title="签到" class="button">　签　<br />　到　</a>
+												{{/if}}
+											{{/if}}
+										{{/if}}
+										<!-- Icons -->
+										<!--<a href="/user/profile/{{$value.uid}}/" title="修改会员信息"><img src="/images/icons/pencil.png" alt="Edit" /></a>
+										<a href="/user/pay/{{$value.uid}}" title="缴费"><img src="/images/icons/money.png" alt="缴费" /></a>
+										<a href="/device/add/{{$value.uid}}" title="缴费记录"><img src="/images/icons/history.png" alt="缴费记录" /></a>
+										<a href="/device/add/{{$value.uid}}" title="添加设备"><img src="/images/icons/hammer_screwdriver.png" alt="添加设备" /></a>
+										<a href="/device/index/{{$value.uid}}" title="查看设备"><img src="/images/icons/dev.png" alt="查看设备" /></a>-->
+									</td>
+								</tr>
+								{{/foreach}}
+							</tbody>
+							
+						</table>
+						
+					</div> <!-- End #tab1 -->
+
+				</div> <!-- End .content-box-content -->
+				
+			</div> <!-- End .content-box -->
+
+			<div class="clear"></div>
+
+			{{include file='includes/foot.html'}}
+			
+		</div> <!-- End #main-content -->
+		
+	</div></body>
+  
+
+<!-- Download From www.exet.tk-->
+</html>

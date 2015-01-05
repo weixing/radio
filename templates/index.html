@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>{{$pro_name}}-{{$title}}</title>
+		{{include file='includes/css-js-header.html'}}
+	</head>
+  
+	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+		
+		<div id="sidebar"><div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
+			
+			{{include file='includes/menu.html'	mod='index' act='index'}}
+			
+		</div></div> <!-- End #sidebar -->
+		
+		<div id="main-content"> <!-- Main Content Section with everything -->
+			
+			<noscript> <!-- Show a notification if the user has disabled javascript -->
+				<div class="notification error png_bg">
+					<div>
+						Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+					Download From <a href="http://www.exet.tk">exet.tk</a></div>
+				</div>
+			</noscript>
+                
+			<ul class="shortcut-buttons-set">
+				{{foreach from=$pay_type key=key item=value}}
+				<li><a class="button" href="/user/list{{$key}}/" style="width:120px;height:40px;margin: 0 0 20px 0;"><span>缴纳{{$value.0}}</span></a></li>
+				{{/foreach}}
+
+				<li><a class="button" href="/user/list100/" style="width:120px;height:40px;margin: 0 0 20px 0;"><span>注册考试</span></a></li>
+				<li><a class="button" href="/user/cardpass/" style="width:120px;height:40px;margin: 0 0 20px 0;"><span>注册考刷卡通过</span></a></li>
+				<li><a class="button" href="/user/list104/" style="width:120px;height:40px;margin: 0 0 20px 0;"><span>B级考试</span></a></li>
+				<li><a class="button" href="/user/list105/" style="width:120px;height:40px;margin: 0 0 20px 0;"><span>C级考试</span></a></li>
+				<li><a class="button" href="/user/list101/" style="width:120px;height:40px;margin: 0 0 20px 0;"><span>会员验机</span></a></li>
+				<li><a class="button" href="/user/list103/" style="width:120px;height:40px;margin: 0 0 20px 0;"><span>会员签到</span></a></li>
+			</ul><!-- End .shortcut-buttons-set -->
+
+			<div class="clear"></div>
+				<p>收据/执照打印设置指南：</p>
+				<p>1.打印功能请使用ie浏览器</p>
+				<p>2.在“文件”->“页面设置”中，如下图</p>
+				<p><img src="/images/print_doc1.jpg"></p>
+				<p>进行如下设置：</p>
+				<p><img src="/images/print_doc2.jpg"></p>
+				<p>其中“页眉和页脚”部分以及“页边距”部分需要完全按照图片中的数值进行设置，纸张选择按照打印的内容选择即可</p>
+
+			<div class="clear"></div>
+
+			{{include file='includes/foot.html'}}
+			
+		</div> <!-- End #main-content -->
+		
+	</div></body>
+  
+
+<!-- Download From www.exet.tk-->
+</html>

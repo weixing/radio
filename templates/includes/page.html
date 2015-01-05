@@ -1,0 +1,47 @@
+{{if $resData.maxPage > 0}}
+<div class="pagination">
+{{assign var='page' value=$resData.page}}
+
+{{assign var='maxPage' value=$resData.maxPage}}
+
+{{assign var='i' value=0}}
+
+{{assign var='perpage' value="3"}}
+
+{{assign var='begin' value=$page-$perpage}}
+
+{{assign var='end' value=$page+$perpage}}
+
+{{if $begin<1}}
+    {{assign var='begin' value=1}}
+{{/if}}
+
+{{if $end>$maxPage}}
+   {{assign var='end' value=$maxPage}}
+{{/if}}
+
+{{if $maxPage >1}}
+	<a href="{{$pageURL}}1" title="First Page">首页</a>
+	{{if $page>1}}
+			<a href="{{$pageURL}}{{$page-1}}" title="Previous Page">上一页</a>
+	       {{else}}
+	{{/if}}
+
+	{{section name=foo start=$begin  max=$maxPage loop=$end+1 step=1}}
+		{{if $page==$smarty.section.foo.index}}
+			<a href="#" class="number current" title="{{$smarty.section.foo.index}}">{{$smarty.section.foo.index}}</a>
+		{{else}}
+			<a href="{{$pageURL}}{{$smarty.section.foo.index}}" class="number" title="{{$smarty.section.foo.index}}">{{$smarty.section.foo.index}}</a>
+		{{/if}}
+	{{/section}}
+
+	{{if $page<$maxPage}}
+		<a href="{{$pageURL}}{{$page+1}}" title="Next Page">下一页</a>
+	{{else}}
+
+	{{/if}}
+	<a href="{{$pageURL}}{{$maxPage}}" title="Last Page">末页</a>
+	<input type="text" style="width:50px;" id="page_go_num"><input type="button" value="前往" baseurl="{{$pageURL}}" id="page_go_button" class="button">
+{{/if}}
+</div>
+{{/if}}

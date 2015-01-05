@@ -1,0 +1,52 @@
+	<form action="/set/adminrun/" method="post">
+	<label class="title-text" style="margin-left:10px;">基本信息</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			<li>
+				<label class="title-text">登录名</label>
+				<input class="text-input medium-input" type="text" id="username" name="username" value="{{if $aid	>	0}}{{$admin_info.username}}{{/if}}" />
+			</li>
+
+			<li>
+				<label class="title-text">姓名</label>
+				<input class="text-input medium-input" type="text" id="name" name="name" value="{{if $aid	>	0}}{{$admin_info.name}}{{/if}}" />
+			</li>			
+
+			<li>
+				<label class="title-text">密码</label>
+				<input class="text-input medium-input" type="password" id="pwd" name="pwd" value="" />
+			</li>		
+
+			<li>
+				<label class="title-text">密码确认</label>
+				<input class="text-input medium-input" type="password" id="repwd" name="repwd" value="" />
+			</li>		
+			
+		</fieldset>
+	</div>
+	<label class="title-text" style="margin-left:10px;">权限设置</label>
+	<div class="content-box column-vs">	
+		<fieldset style="margin:10px;">
+			<!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+			{{foreach from=$_global_permission key=key item=value}}
+			{{if $key==0 || $per_name	!=	$value[1]}}
+			<li style="width:100%"><b>{{$value[1]}}</b></li>
+			{{/if}}
+			<li style="padding-left:20px;width:45%">
+				<label class="title-text" for="permission_{{$key}}">
+					<input type="checkbox" id="permission_{{$key}}" name="permission_{{$key}}" value="1" {{if $aid>0 && $admin_info.permission[$key] == '1'}}checked{{/if}} />
+					{{$value[1]}}:{{$value[0]}}
+				</label>
+			</li>
+			{{assign var="per_name" value=$value[1]}}
+			{{/foreach}}
+		
+			<li style="width:100%">
+				<input class="button" type="submit" value="保存" />
+			</li>
+		</fieldset>
+	</div>
+	<input type=hidden name=aid value="{{$aid}}">
+	<div class="clear"></div><!-- End .clear -->
+	</form>
